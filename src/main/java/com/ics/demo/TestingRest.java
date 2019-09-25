@@ -21,8 +21,8 @@ import java.util.List;
 @Component
 public class TestingRest implements CommandLineRunner {
 
-    private final FeignRestClient feignRestClient;
-    private final MockFeignClient mockFeignClient;
+    private final FeignRestClient feignRestClient; // creates a variable of class FeignRestClient
+    private final MockFeignClient mockFeignClient; // creates a variable of class MockFeignClient
 
     public TestingRest(FeignRestClient feignRestClient, MockFeignClient mockFeignClient) {
         this.feignRestClient = feignRestClient;
@@ -38,6 +38,7 @@ public class TestingRest implements CommandLineRunner {
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<University>>(){});
+
         List<University> universities = response.getBody();
         System.out.println("Response:"+universities.toString() );
 
@@ -68,8 +69,8 @@ String url = "http://10.51.10.111:9090/universities/search?name="+university.get
         MockAppointment mockAppointment = mockFeignClient.createAppointment(new MockAppointment(student.getId(), lecturers.get(0).getId()));
         System.out.println("Created Appointment: "+ mockAppointment);
 
-        MockAppointment confirmappointment = mockFeignClient.confirmAppointment(mockAppointment.getId(), student.getId());
-        System.out.println("Appointment confirmed:"+confirmappointment);
+        MockAppointment confirmAppointment = mockFeignClient.confirmAppointment(mockAppointment.getId(), student.getId());
+        System.out.println("Appointment confirmed:"+confirmAppointment);
 
 }
 }
