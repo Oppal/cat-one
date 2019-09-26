@@ -1,14 +1,12 @@
 package com.ics.demo;
 
-import com.ics.demo.models.MockAppointment;
-import com.ics.demo.models.MockLecturer;
-import com.ics.demo.models.MockStudent;
+import com.ics.demo.models.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name="mockclient", url = "http://10.55.8.28/api/", configuration = FeignConfig.class)
+@FeignClient(name="mockclient", url = "http://10.51.10.111:2200", configuration = FeignConfig.class)
 
 public interface MockFeignClient {
     //creates a student object of type MockStudent
@@ -17,8 +15,8 @@ public interface MockFeignClient {
 
 
     // retrieves student with parameter student number
-    @RequestMapping(method=RequestMethod.GET, value= "students")
-    MockStudent searchByName(@RequestParam(value="studentNumber") String number);
+//    @RequestMapping(method=RequestMethod.GET, value= "students")
+//    MockStudent searchByName(@RequestParam(value="studentNumber") String number);
 
 
 
@@ -30,25 +28,33 @@ public interface MockFeignClient {
 //    @RequestMapping(method = RequestMethod.POST, value = "appointments")
 //    MockAppointment createAppointment(@RequestBody MockAppointment appointment);
 
-    @RequestMapping(method=RequestMethod.GET, value = "students")
-    List<MockStudent> getAllStudents();
+//    @RequestMapping(method=RequestMethod.GET, value = "students")
+//    List<MockStudent> getAllStudents();
 
     @RequestMapping(method=RequestMethod.POST, value="students")
     MockStudent createStudent(@RequestBody MockStudent student);
 
+    @RequestMapping(method = RequestMethod.POST, value = "matches")
+    Match createMatch(@RequestBody Match match);
 
-    @RequestMapping(method = RequestMethod.POST, value = "appointments")
-    MockAppointment createAppointment(@RequestBody MockAppointment appointment);
+        @RequestMapping(method = RequestMethod.POST, value = "matches")
+        Match createMatch(@RequestParam(name = "gender") String gender, @RequestParam(value="studentId") Long studentId);
 
 
-    @RequestMapping(method = RequestMethod.PATCH, value = "appointments/{id}")
-    MockAppointment confirmAppointment(@PathVariable(name = "id") Long id, @RequestParam(value = "studentId")Long studentId);
 
-    @RequestMapping(method = RequestMethod.POST, value="{unitId}/enroll/{studentId}" )
-    MockStudent enroll(@PathVariable("unitId") Long unitId, @PathVariable("studentId") Long studentId);
 
-    @RequestMapping(method = RequestMethod.POST, value = "{unitId}/validate/{enrollmentKey}")
-    MockStudent validate(@PathVariable("unitId")Long unitId, @PathVariable("enrollmentKey") String enrollmentKey);
+//    @RequestMapping(method = RequestMethod.POST, value = "appointments")
+//    MockAppointment createAppointment(@RequestBody MockAppointment appointment);
+
+
+//    @RequestMapping(method = RequestMethod.PATCH, value = "appointments/{id}")
+//    MockAppointment confirmAppointment(@PathVariable(name = "id") Long id, @RequestParam(value = "studentId")Long studentId);
+//
+//    @RequestMapping(method = RequestMethod.POST, value="{unitId}/enroll/{studentId}" )
+//    MockStudent enroll(@PathVariable("unitId") Long unitId, @PathVariable("studentId") Long studentId);
+//
+//    @RequestMapping(method = RequestMethod.POST, value = "{unitId}/validate/{enrollmentKey}")
+//    MockStudent validate(@PathVariable("unitId")Long unitId, @PathVariable("enrollmentKey") String enrollmentKey);
 
     //ch
 //        @RequestMapping(method = RequestMethod.POST, value = "students")
@@ -66,8 +72,9 @@ public interface MockFeignClient {
 //        @RequestMapping(method = RequestMethod.PATCH,value = "companies/{companyId}/attachments")
 //        Department RequestDepartment(@PathVariable("companyId") Long companyId,@RequestParam(name = "studentId") Long studentId,@RequestParam(name = "departmentId") Long departmentId);
 //
-//        @RequestMapping(method = RequestMethod.DELETE, value = "departments")
-//        Department RejectDepartment(@RequestBody Department department);
+        @RequestMapping(method = RequestMethod.PATCH, value = "studentId")
+        Match RejectMatch(@PathVariable("studentId") Long id, @RequestParam(name="reason") String reason);
 
 
 }
+

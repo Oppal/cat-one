@@ -1,9 +1,6 @@
 package com.ics.demo;
 
-import com.ics.demo.models.MockAppointment;
-import com.ics.demo.models.MockLecturer;
-import com.ics.demo.models.MockStudent;
-import com.ics.demo.models.University;
+import com.ics.demo.models.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -64,10 +61,12 @@ public class TestingRest implements CommandLineRunner {
 //        System.out.println("Lecturers:"+lecturers);
 //        List<MockStudent> students = mockFeignClient.getAllStudents();
 
-//        MockStudent student = mockFeignClient.createStudent(new MockStudent("94459", "Lucas Oppal"));
-//        System.out.println(student);
-        MockStudent enroll = mockFeignClient.enroll((long)1, (long)8);
-        MockStudent validate = mockFeignClient.validate((long)1, "rytyfhdvgtr76378");
+   //MockStudent student = mockFeignClient.createStudent(new MockStudent("94459", "Lucas Oppal"));
+        mockFeignClient.createMatch("MALE", (long) 45);
+
+
+//        MockStudent enroll = mockFeignClient.enroll((long)1, (long)8);
+//        MockStudent validate = mockFeignClient.validate((long)1, "rytyfhdvgtr7637");
 
 
 //
@@ -85,7 +84,8 @@ public class TestingRest implements CommandLineRunner {
 //        feignRestClient.createStudent(student);
 //        feignRestClient.RequestAttachment((long)6,(long)24);
 //        feignRestClient.RequestDepartment((long)6,(long)24,(long)12);
-//        feignRestClient.RejectDepartment(new Department(24,8,6));
+      //  mockFeignClient.RejectMatch(new Match((long)21, "i dont want");
+
 
     }
 }
