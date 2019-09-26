@@ -4,7 +4,7 @@ public class MockStudent {
     public long id;
 
     private String studentNumber;
-    private String firstName;
+    private String studentName;
 
     public long getId() {
         return id;
@@ -22,17 +22,17 @@ public class MockStudent {
         this.studentNumber = studentNumber;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getstudentName() {
+        return studentName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setstudentName(String studentName) {
+        this.studentName = studentName;
     }
 
-    public MockStudent(String studentNumber, String firstName) {
+    public MockStudent(String studentNumber, String studentName) {
         this.studentNumber = studentNumber;
-        this.firstName = firstName;
+        this.studentName = studentName;
     }
 
     public MockStudent()
@@ -43,7 +43,7 @@ public class MockStudent {
         return "MockStudent{" +
                 "id=" + id +
                 ", studentNumber='" + studentNumber + '\'' +
-                ", firstName='" + firstName + '\'' +
+                ", studentName='" + studentName + '\'' +
                 '}';
     }
 }

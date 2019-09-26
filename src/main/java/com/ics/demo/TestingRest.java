@@ -21,56 +21,71 @@ import java.util.List;
 @Component
 public class TestingRest implements CommandLineRunner {
 
-    private final FeignRestClient feignRestClient; // creates a variable of class FeignRestClient
+       // private final FeignRestClient feignRestClient; // creates a variable of class FeignRestClient
     private final MockFeignClient mockFeignClient; // creates a variable of class MockFeignClient
 
-    public TestingRest(FeignRestClient feignRestClient, MockFeignClient mockFeignClient) {
-        this.feignRestClient = feignRestClient;
+    public TestingRest(MockFeignClient mockFeignClient) {
         this.mockFeignClient = mockFeignClient;
     }
 
     @Override
     public void run(String... args) throws Exception {
-        RestTemplate restTemplate= new RestTemplate();
+//        RestTemplate restTemplate= new RestTemplate();
+//
+//        ResponseEntity<List<University>> response = restTemplate.exchange(
+//                "http://10.50.35.23:1000/universities",
+//                HttpMethod.GET,
+//                null,
+//                new ParameterizedTypeReference<List<University>>(){});
+//
+//        List<University> universities = response.getBody();
+//        System.out.println("Response:"+universities.toString() );
+//
+////        universities = feignRestClient.getAllUniversities();
+////        System.out.println("Feign Universities:"+universities.toString());
+//
+//        University university = restTemplate.getForObject(
+//                "http://10.50.35.23:1000/universities/1",
+//                University.class
+//        );
+//
+//String url = "http://10.50.35.23:1000/universities/search?name="+university.getName();
+//        University searched = restTemplate.getForObject(
+//                url,
+//                University.class
+//        );
 
-        ResponseEntity<List<University>> response = restTemplate.exchange(
-                "http://10.51.10.111:9090/universities",
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<University>>(){});
-
-        List<University> universities = response.getBody();
-        System.out.println("Response:"+universities.toString() );
-
-//        universities = feignRestClient.getAllUniversities();
-//        System.out.println("Feign Universities:"+universities.toString());
-
-        University university = restTemplate.getForObject(
-                "http://10.51.10.111:9090/universities/1",
-                University.class
-        );
-
-String url = "http://10.51.10.111:9090/universities/search?name="+university.getName();
-        University searched = restTemplate.getForObject(
-                url,
-                University.class
-        );
 
 
-        MockStudent student = mockFeignClient.createStudent(new MockStudent("94459", "Lucas Oppal"));
-        System.out.println(student);
 
-        MockStudent searchByName = mockFeignClient.searchByName(student.getStudentNumber());
-        System.out.println("Search returns"+searchByName);
 
-        List<MockLecturer> lecturers = mockFeignClient.viewLecturers();
-        System.out.println("Lecturers:"+lecturers);
+//
+//        List<MockLecturer> lecturers = mockFeignClient.viewLecturers();
+//        System.out.println("Lecturers:"+lecturers);
+//        List<MockStudent> students = mockFeignClient.getAllStudents();
 
-        MockAppointment mockAppointment = mockFeignClient.createAppointment(new MockAppointment(student.getId(), lecturers.get(0).getId()));
-        System.out.println("Created Appointment: "+ mockAppointment);
+//        MockStudent student = mockFeignClient.createStudent(new MockStudent("94459", "Lucas Oppal"));
+//        System.out.println(student);
+        MockStudent enroll = mockFeignClient.enroll((long)1, (long)8);
+        MockStudent validate = mockFeignClient.validate((long)1, "rytyfhdvgtr76378");
 
-        MockAppointment confirmAppointment = mockFeignClient.confirmAppointment(mockAppointment.getId(), student.getId());
-        System.out.println("Appointment confirmed:"+confirmAppointment);
 
-}
+//
+//        MockStudent searchByName = mockFeignClient.searchByName(student.getStudentNumber());
+//        System.out.println("Search returns"+searchByName);
+//
+//        MockAppointment mockAppointment = mockFeignClient.createAppointment(new MockAppointment(student.getId(), 1L));
+//        System.out.println("Created Appointment: "+ mockAppointment);
+//
+//        MockAppointment confirmAppointment = mockFeignClient.confirmAppointment(mockAppointment.getId(), student.getId());
+//        System.out.println("Appointment confirmed:"+confirmAppointment);
+
+
+//        Student student =new Student(911111,"okwemba");
+//        feignRestClient.createStudent(student);
+//        feignRestClient.RequestAttachment((long)6,(long)24);
+//        feignRestClient.RequestDepartment((long)6,(long)24,(long)12);
+//        feignRestClient.RejectDepartment(new Department(24,8,6));
+
+    }
 }
